@@ -2,8 +2,8 @@
 
 Official implementation of:
 
-- **Learning-Based Dynamics Modeling and Robust Control for Tendon-Driven Continuum Robots** (Ziqing Zou*, Ke Qiu*, Fei Wang, Haojian Lu, Rong Xiong, Yue Wang) — [arXiv:2604.25691](https://arxiv.org/abs/2604.25691)
-- **Reference-Augmented Learning for Precise Tracking Policy of Tendon-Driven Continuum Robots** (Ziqing Zou, Ke Qiu, Haojian Lu, Rong Xiong, Yue Wang) — [arXiv:2604.25698](https://arxiv.org/abs/2604.25698)
+- **Learning-Based Dynamics Modeling and Robust Control for Tendon-Driven Continuum Robots** — [arXiv:2604.25691](https://arxiv.org/abs/2604.25691)
+- **Reference-Augmented Learning for Precise Tracking Policy of Tendon-Driven Continuum Robots** — [arXiv:2604.25698](https://arxiv.org/abs/2604.25698)
 
 ## Overview
 
