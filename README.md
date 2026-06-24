@@ -124,14 +124,21 @@ Observation type strings (e.g., `"Tlv"`) define which quantities the model obser
 
 ## Citation
 
-If you find this work useful, please cite:
+If you find this work useful, please cite our papers:
 
 ```bibtex
-@software{continuumcontrol2025,
-  title = {ContinuumControl: Learning-based Dynamics Modeling and Tracking Control for Tendon-driven Continuum Robots},
-  author = {Ziqing Zou},
-  url = {https://github.com/ZiqingZou/ContinuumControl},
-  year = {2025}
+@article{zou2026dynamics,
+  title={Learning-Based Dynamics Modeling and Robust Control for Tendon-Driven Continuum Robots},
+  author={Ziqing Zou},
+  journal={arXiv preprint arXiv:2604.25691},
+  year={2026}
+}
+
+@article{zou2026reference,
+  title={Reference-Augmented Learning for Precise Tracking Policy of Tendon-Driven Continuum Robots},
+  author={Ziqing Zou},
+  journal={arXiv preprint arXiv:2604.25698},
+  year={2026}
 }
 ```
 
