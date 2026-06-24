@@ -9,6 +9,8 @@ Official implementation of:
 
 ContinuumControl is a differentiable learning framework for tendon-driven continuum robots (TDCRs) that integrates high-fidelity dynamics modeling with robust neural control.
 
+📄 **Paper**: [arXiv:2604.25691](https://arxiv.org/abs/2604.25691) | 🎬 **Video**: [Bilibili](https://www.bilibili.com/video/BV182jR67Ek5/)
+
 <p align="center">
   <img src="docs/fig_system.png" width="700"/>
 </p>
