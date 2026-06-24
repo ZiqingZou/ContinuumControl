@@ -1,0 +1,109 @@
+# Description of log files of the collected data.
+# Data were collected on 2025-11-18 under both feedforward and feedback control.
+# The tendons were tightly tensioned, 
+# and this could potentially lead to less oscillations in the system.
+
+
+# File name -----------------------------------
+    Log_{time_scale}_{traj_type}_{k_ff}_{k_p}_{k_d}.csv
+    time_scale: scaling coefficient for the time steps of the reference trajectories
+    traj_type: shape of the EE paths of the reference trajectories
+    k_ff: coefficient for feedforward control
+    k_p: proportional coefficient for feedback control
+    k_d: derivative coeeficient for feedback control
+
+
+# Line -----------------------------------------
+line [0]
+    file created time
+line [1:-1]
+    sequence data
+
+
+# Column ---------------------------------------
+column [0]
+    data: UTC time (hour:minite:second)
+    dim: 1
+
+column [1]
+    notation: t
+    data: local time since the first step (s)
+    dim: 1
+
+colunm [2:8]
+    notation: config_ref
+    data: target state in configuration space
+    dim: 6
+
+column [8：14]
+    notation: vel_config_ref
+    data: target dot state in configuration space
+    dim: 6
+
+column [14:30]
+    notation: trans_ee_ref
+    data: target EE pose in transportation matrix (mm for position),
+          [trans_ee_ref[0, 0], trans_ee_ref[0, 1], trans_ee_ref[0, 2], trans_ee_ref[0, 3],
+           trans_ee_ref[1, 0], trans_ee_ref[1, 1], trans_ee_ref[1, 2], trans_ee_ref[1, 3],
+           trans_ee_ref[2, 0], trans_ee_ref[2, 1], trans_ee_ref[2, 2], trans_ee_ref[2, 3],
+           trans_ee_ref[3, 0], trans_ee_ref[3, 1], trans_ee_ref[3, 2], trans_ee_ref[3, 3]]
+    dim: 16
+
+column [30:39]
+    notation: l_motor
+    data: measured motor rotations (mm)
+    dim: 9
+
+column [39:48]
+    notation: vel_motor
+    data: measured motor velocities (step/s)
+    dim: 9
+
+column [48:57]
+    notation: torque_motor
+    data: measured motor torque (Nm)
+    dim: 9
+
+column [57:73]
+    notation: trans_ee  # system output
+    data: measured ee pose (mm for position),
+          [trans_ee[0, 0], trans_ee[0, 1], trans_ee[0, 2], trans_ee[0, 3],
+           trans_ee[1, 0], trans_ee[1, 1], trans_ee[1, 2], trans_ee[1, 3],
+           trans_ee[2, 0], trans_ee[2, 1], trans_ee[2, 2], trans_ee[2, 3],
+           trans_ee[3, 0], trans_ee[3, 1], trans_ee[3, 2], trans_ee[3, 3]]
+    dim: 16
+
+column [73:76]
+    notation: pos_middle
+    data: measured translations at 2/3 of robot (mm)
+    dim: 3
+
+column [76:79]
+    notation: pos_low
+    data: measured translations at 1/3 of robot (mm)
+    dim: 3
+
+column [79:112]
+    notation: marker
+    data: measured translations of the 11 markers,
+          [marker[0, 0], marker[0, 1], marker[0, 2],
+           marker[1, 0], marker[1, 1], marker[1, 2],
+           marker[2, 0], marker[2, 1], marker[2, 2],
+           marker[3, 0], marker[3, 1], marker[3, 2],
+           marker[4, 0], marker[4, 1], marker[4, 2],
+           marker[5, 0], marker[5, 1], marker[5, 2],
+           marker[6, 0], marker[6, 1], marker[6, 2],
+           marker[7, 0], marker[7, 1], marker[7, 2],
+           marker[8, 0], marker[8, 1], marker[8, 2],
+           marker[9, 0], marker[9, 1], marker[9, 2],
+           marker[10, 0], marker[10, 1], marker[10, 2]]
+    dim: 33
+
+column [112:121]
+    notation: target_vel_motor  # system input
+    data: motor velocity control command (step/s)
+    dim: 9
+    # To convert to mm/s, multiply:
+    # [-np.pi / 7500, -np.pi / 7500, -np.pi / 7500,
+    #  -np.pi / 2500, -np.pi / 2500, -np.pi / 2500,
+    #  -np.pi / 7500, -np.pi / 7500, -np.pi / 7500]

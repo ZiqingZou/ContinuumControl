@@ -1,0 +1,296 @@
+# Dynamics model configuration
+dynamics:
+  obs_type: "Tlv"         # observation type; choices: Tlvq / lvq / Tlv / lv / Tl / l / Tv / v / T
+                          # If 'T' not in obs_type, an extra dynamics model is trained for absolute EE pose.
+  net_type: "gru"         # network type; options: mlp / rnn / gru / lstm (all use layernorm)
+  residual_predict: True  # if true, model predicts delta for obs; else predicts absolute
+  
+  net_params:
+    mlp:
+      history_window: 50  # history length in steps or history input length to compute initial hidden state
+      act: "elu"          # activation function str; options: elu / leaky_relu / relu / swish / gelu / tanh
+      hidden_dim: 1024    # hidden layer width
+      depth: 5            # number of layers, including output layer
+      ln: True            # use layer normalization
+      dropout: 0.3        # dropout rate; 0.0 means no dropout
+    
+    rnn:
+      hidden_dim: 1024    # hidden state dim and hidden layer width (for both rnn and output mlp)
+      truncation_len: 1   # length for history truncated backpropagation through time, 1 means no history gradient
+      initial_h_len: 50   # length of initial history to use for hidden state initialization, .inf means all history
+      ln: True            # use layer normalization (for both rnn and output mlp)
+      dropout: 0.3        # dropout rate; 0.0 means no dropout (for both rnn and output mlp)
+      rnn_act: "tanh"     # activation function for rnn layers; options: tanh / relu / elu / leaky_relu / swish / gelu
+      rnn_depth: 3        # number of layers of rnn net
+      rnn_h_bias: True    # use bias for rnn hidden state
+      out_act: "elu"      # activation function for output mlp; options: elu / leaky_relu / relu / swish / gelu / tanh
+      out_depth: 2        # number of layers for output mlp, including output layer
+    
+    gru:
+      hidden_dim: 1024    # hidden state dim and hidden layer width (for both rnn and output mlp)
+      truncation_len: 1   # length for history truncated backpropagation through time, 1 means no history gradient
+      initial_h_len: 50   # length of initial history to use for hidden state initialization, .inf means all history
+      ln: True            # use layer normalization (for both rnn and output mlp)
+      dropout: 0.3        # dropout rate; 0.0 means no dropout (for both rnn and output mlp)
+      rnn_act: "tanh"     # activation function for rnn layers; options: tanh / relu / elu / leaky_relu / swish / gelu
+      rnn_depth: 3        # number of layers of rnn net
+      rnn_h_bias: True    # use bias for rnn hidden state
+      out_act: "elu"      # activation function for output mlp; options: elu / leaky_relu / relu / swish / gelu / tanh
+      out_depth: 2        # number of layers for output mlp, including output layer
+    
+    lstm:
+      hidden_dim: 1024    # hidden state dim and hidden layer width (for both rnn and output mlp)
+      truncation_len: 1   # length for history truncated backpropagation through time, 1 means no history gradient
+      initial_h_len: 50   # length of initial history to use for hidden state initialization, .inf means all history
+      ln: True            # use layer normalization (for both rnn and output mlp)
+      dropout: 0.3        # dropout rate; 0.0 means no dropout (for both rnn and output mlp)
+      rnn_act: "tanh"     # activation function for rnn layers; options: tanh / relu / elu / leaky_relu / swish / gelu
+      rnn_depth: 3        # number of layers of rnn net
+      rnn_h_bias: True    # use bias for rnn hidden state
+      out_act: "elu"      # activation function for output mlp; options: elu / leaky_relu / relu / swish / gelu / tanh
+      out_depth: 2        # number of layers for output mlp, including output layer
+
+# Policy model configuration
+policy:
+  stochastic: False       # stochastic policy or deterministic policy
+  u_clip: 12.56637        # max control magnitude; units: mm/s
+
+  ref_horizon: 50         # number of future steps of reference trajectory provided to policy per step
+  input_type: "rou"       # input type; options: ro (ref + obs) / ru / rou (last control) w/o '_pos_only'
+  output_step: 1          # number of steps the policy outputs controls for at each policy step
+
+  obs_type: "Tlv"         # same options/meaning as dynamics.obs_type
+  hidden_dynamics: False   # whether to use a dynamics model to update hidden state
+  net_type: "mlp_ignore_h"         # network type; options: mlp / rnn / gru / lstm (all use layernorm)
+
+  net_params:
+    mlp_ignore_h:
+      act: "elu"          # activation function str; options: elu / leaky_relu / relu / swish / gelu / tanh
+      hidden_dim: 1024    # hidden layer width
+      depth: 5            # number of layers, including output layer
+      ln: True            # use layer normalization
+      dropout: 0.3        # dropout rate; 0.0 means no dropout
+
+    mlp_with_hout:
+      act: "elu"          # activation function str; options: elu / leaky_relu / relu / swish / gelu / tanh
+      hidden_dim: 1024    # hidden layer width
+      depth: 5            # number of layers, including output layer
+      ln: True            # use layer normalization
+      dropout: 0.3        # dropout rate; 0.0 means no dropout
+
+    mlp:
+      history_window: 50  # history length in steps or history input length to compute initial hidden state
+      act: "elu"          # activation function str; options: elu / leaky_relu / relu / swish / gelu / tanh
+      hidden_dim: 1024    # hidden layer width
+      depth: 5            # number of layers, including output layer
+      ln: True            # use layer normalization
+      dropout: 0.3        # dropout rate; 0.0 means no dropout
+    
+    rnn:
+      hidden_dim: 1024    # hidden state dim and hidden layer width (for both rnn and output mlp)
+      truncation_len: 1   # not used for policy net, but kept for consistency
+      ln: True            # use layer normalization (for both rnn and output mlp)
+      dropout: 0.3        # dropout rate; 0.0 means no dropout (for both rnn and output mlp)
+      rnn_act: "tanh"     # activation function for rnn layers; options: tanh / relu / elu / leaky_relu / swish / gelu
+      rnn_depth: 3        # number of layers of rnn net
+      rnn_h_bias: True    # use bias for rnn hidden state
+      out_act: "elu"      # activation function for output mlp; options: elu / leaky_relu / relu / swish / gelu / tanh
+      out_depth: 2        # number of layers for output mlp, including output layer  2
+    
+    gru:
+      hidden_dim: 1024    # hidden state dim and hidden layer width (for both rnn and output mlp)
+      truncation_len: 1   # not used for policy net, but kept for consistency
+      ln: True            # use layer normalization (for both rnn and output mlp)
+      dropout: 0.3        # dropout rate; 0.0 means no dropout (for both rnn and output mlp)
+      rnn_act: "tanh"     # activation function for rnn layers; options: tanh / relu / elu / leaky_relu / swish / gelu
+      rnn_depth: 3        # number of layers of rnn net
+      rnn_h_bias: True    # use bias for rnn hidden state
+      out_act: "elu"      # activation function for output mlp; options: elu / leaky_relu / relu / swish / gelu / tanh
+      out_depth: 2        # number of layers for output mlp, including output layer
+    
+    lstm:
+      hidden_dim: 1024    # hidden state dim and hidden layer width (for both rnn and output mlp)
+      truncation_len: 1   # not used for policy net, but kept for consistency
+      ln: True            # use layer normalization (for both rnn and output mlp)
+      dropout: 0.3        # dropout rate; 0.0 means no dropout (for both rnn and output mlp)
+      rnn_act: "tanh"     # activation function for rnn layers; options: tanh / relu / elu / leaky_relu / swish / gelu
+      rnn_depth: 3        # number of layers of rnn net
+      rnn_h_bias: True    # use bias for rnn hidden state
+      out_act: "elu"      # activation function for output mlp; options: elu / leaky_relu / relu / swish / gelu / tanh
+      out_depth: 2        # number of layers for output mlp, including output layer
+
+# Normalization statistics for observations and actions
+# Normalization pattern used by both models:
+#   input_norm = (input_actual - mean) / std
+#   model returns normalized delta or output; convert back by: output_actual = output_norm * std + mean
+norm:
+  # End-effector transform (rotation as rotation vector in rad, position in mm)
+  rotvec:
+    mean:
+      - 0.0
+      - 0.0
+      - 0.0           # rad
+    std:
+      - 0.55  # 0.46  # 0.4
+      - 0.55  # 0.46  # 0.4
+      - 0.2  # 0.13  # 0.063         # rad
+  pos:
+    mean:
+      - 0.0
+      - 0.0
+      - 640.0  # 655.0         # mm
+    std:
+      - 160.0  # 150.0  # 140.0
+      - 160.0  # 150.0  # 140.0
+      - 65.0   # 60.0   # 21.6          # mm
+
+  # Motor observations: length, velocity, torque
+  l:
+    mean:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0           # mm
+    std:
+      - 30.0  # 30.0
+      - 30.0
+      - 30.0
+      - 25.0  # 20.0  # 16.0
+      - 25.0
+      - 25.0
+      - 30.0  # 28.0  # 27.0
+      - 30.0
+      - 30.0          # mm
+  v:
+    mean:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0           # mm/s
+    std:
+      - 3.0  # 3.0  # 2.0
+      - 3.0
+      - 3.0
+      - 5.5  # 5.5  # 3.3
+      - 5.5
+      - 5.5
+      - 4.0  # 4.0  # 2.0
+      - 4.0
+      - 4.0           # mm/s
+  torque:
+    mean:
+      - 0.5   # 0.55
+      - 0.65  # 0.55
+      - 0.4   # 0.55
+      - 0.15  # 0.24
+      - 0.15  # 0.24
+      - 0.4   # 0.24
+      - 0.5   # 0.55
+      - 0.5   # 0.55
+      - 0.5   # 0.55          # N·m
+    std:
+      - 0.45
+      - 0.45
+      - 0.42  # 0.45
+      - 0.1   # 0.14
+      - 0.15  # 0.14
+      - 0.15  # 0.14
+      - 0.3   # 0.45
+      - 0.3   # 0.45
+      - 0.5   # 0.45          # N·m
+
+  # End-effector delta (used for prediction targets)
+  delta_rotvec:
+    mean:
+      - 0.0
+      - 0.0
+      - 0.0           # rad
+    std:
+      - 0.09  # 0.0041
+      - 0.09  # 0.030  # 0.0034
+      - 0.05  # 0.0023        # rad
+  delta_pos:
+    mean:
+      - 0.0
+      - 0.0
+      - 0.0           # mm
+    std:
+      - 3.0  # 1.8  # 0.8
+      - 3.0  # 1.8  # 0.8
+      - 2.3  # 1.2  # 0.22          # mm
+
+  # Motor delta states (for predicted deltas)
+  delta_l:
+    mean:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0           # mm
+    std:
+      - 0.08  # 0.06  # 0.04
+      - 0.08
+      - 0.08
+      - 0.11  # 0.11  # 0.068
+      - 0.11
+      - 0.11
+      - 0.09  # 0.08  # 0.04
+      - 0.09
+      - 0.09          # mm
+  delta_v:
+    mean:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0           # mm/s
+    std:
+      - 0.3  # 0.3    # 0.07
+      - 0.3
+      - 0.3
+      - 0.6  # 0.65  # 0.13
+      - 0.6
+      - 0.6
+      - 0.3  # 0.3
+      - 0.3
+      - 0.3          # mm/s
+  delta_torque:
+    mean:
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0
+      - 0.0           # N·m
+    std:
+      - 0.01  # 0.0075
+      - 0.01
+      - 0.01
+      - 0.01
+      - 0.01
+      - 0.01
+      - 0.01
+      - 0.01
+      - 0.01        # N·m
+      

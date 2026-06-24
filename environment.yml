@@ -1,0 +1,18 @@
+name: continuum
+channels:
+  - pytorch
+  - nvidia
+  - defaults
+dependencies:
+  - python=3.10
+  - numpy
+  - pandas
+  - scipy
+  - h5py
+  - matplotlib
+  - pytorch=2.4.1
+  - torchvision=0.19.1
+  - torchaudio=2.4.1
+  - pytorch-cuda=12.1
+  - pip:
+    - wandb
