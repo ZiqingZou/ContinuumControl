@@ -142,14 +142,6 @@ python train/offline_train.py --model dynamics
 python train/offline_train.py --model policy
 ```
 
-### Online Fine-tuning
-
-Fine-tune models on a real robot via socket communication:
-
-```bash
-python train/online_train.py
-```
-
 ### MPC Optimization
 
 Optimize control sequences using a learned dynamics model:
