@@ -6,30 +6,18 @@ dynamics:
   fine_tune: False
 
   validation_list:    # validation dataset list
-    # - "total_t_val"
-    # - "total_t_noise_val"
-    - "251118_val"
-    # - "251229_val"
-    # - "251229_try_val"
-    # - "online_val"
-    - "260317"
+    # - "251118_val"
+    # - "260317"
 
   test_list:    # test dataset list
     # - "test"
-    # - "251229_total"
-    # - "total_t_total"
-    # - "251118_val"
-    # - "251229_val"
-    # - "260225_val"
-    # - "total_t_val"
-    # - "total_t_noise_val"
     # - "eval"
     # - "train"
 
   device: cuda
   batch_size: 512
   num_workers: 4
-  data_source: "total_new"  # "260121_test"  # "total" # "260104"  #
+  data_source: "samples_dataset"
   bptt_steps: 50
   epochs: 1000
   learning_rate: 0.00001
@@ -47,29 +35,27 @@ dynamics:
 
 
 policy: 
-  name: "policy_new_mlp_ignore_h"  # "policy_new_hidden_dynamics"  # "policy_260121_test_pose_only"  # "policy_stochastic_big_smooth"  # "policy_rnn_tf"
-  dynamics_name: "dynamics_new"  # "dynamics_t_"  # null  #"dynamics_gru"     # path to the load dynamics model checkpoint
+  name: "policy_new_mlp_ignore_h"  
+  dynamics_name: "dynamics_new"  # null    # path to the load dynamics model checkpoint
   dynamics_load_type: "latest"  # null  # "best"  # "latest"
-  load_name: "policy_new_mlp_ignore_h"  # "policy_new_hidden_dynamics" # null  # "policy_t_obs_ref_450_6" # "policy_t_"  # 
+  load_name: "policy_new_mlp_ignore_h"  # null 
   policy_load_type: "latest"  # null  #"best"
   fine_tune: False
 
-  obs_ref: False  # whether use real future obs as reference during training (including eval and test)
+  obs_ref: True  # whether use real future obs as reference during training (including eval and test)
 
   validation_list:    # validation dataset list
     # - "251118_val"`
     # - "260225_val"
-    # - "251229_val"
-    # - "251229_try_val"
 
   test_list:    # test dataset list
-    - "260317"
+    # - "260317"
     # - "260408_mlp_ignore_h"
 
   device: cuda
   batch_size: 256
   num_workers: 4
-  data_source: "total_new"  # "260317_policy_test_compare"  # "mpc"  # 
+  data_source: "samples_dataset"
   min_regressive_steps: 50  # loading traj length must be longer than this value
 
   # for dataset ref
@@ -107,21 +93,7 @@ mpc:
   device: cuda
   data_source: "mpc"
   test_list:    # test dataset(trajectories) list
-    - "2.0_R"
-    - "2.0_O"
-    - "2.0_B"
-    - "2.0_T"
-    - "2.0_straight_line"
-    - "3.0_R"
-    - "3.0_O"
-    - "3.0_B"
-    - "3.0_T"
-    - "3.0_straight_line"
-    - "5.0_R"
-    - "5.0_O"
-    - "5.0_B"
-    - "5.0_T"
-    - "5.0_straight_line"
+    # - "2.0_R"
 
   obs_ref: False  # whether use real future obs as reference during training (including eval and test)
 
