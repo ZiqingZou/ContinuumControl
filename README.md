@@ -22,6 +22,14 @@ TDCRs pose significant modeling and control challenges due to complex nonlineari
 
 ## Experimental Results
 
+### Dynamics Prediction ([arXiv:2604.25691](https://arxiv.org/abs/2604.25691))
+
+<p align="center">
+  <img src="docs/fig_dynamics_traj.png" width="700"/>
+</p>
+
+<p align="center"><em>Long-horizon auto-regressive prediction across a 2.5-minute random trajectory. Our model (red solid) maintains the lowest position error with the slowest error accumulation rate.</em></p>
+
 ### Tracking Performance ([arXiv:2604.25698](https://arxiv.org/abs/2604.25698))
 
 **Average Tracking Errors (Position mm / Orientation °)**
@@ -37,14 +45,6 @@ TDCRs pose significant modeling and control challenges due to complex nonlineari
 </p>
 
 <p align="center"><em>Tracking performance on letter-shaped trajectories at 1.0× speed. Our policy (red) achieves superior precision compared to the Jacobian-based controller (green).</em></p>
-
-### Dynamics Prediction ([arXiv:2604.25691](https://arxiv.org/abs/2604.25691))
-
-<p align="center">
-  <img src="docs/fig_dynamics_traj.png" width="700"/>
-</p>
-
-<p align="center"><em>Long-horizon auto-regressive prediction across a 2.5-minute random trajectory. Our model (red solid) maintains the lowest position error with the slowest error accumulation rate.</em></p>
 
 ## Method
 
