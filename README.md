@@ -41,7 +41,7 @@ TDCRs pose significant modeling and control challenges due to complex nonlineari
 | 2.5×     | **17.3** / -    | 19.0 / **6.9°**   | 159.1 / 16.4°    | 79.6 / 22.8°    | 43.6 / 20.9°    |
 
 <p align="center">
-  <img src="docs/fig_xy_traj.png" width="500"/>
+  <img src="docs/fig_xy_traj.png" width="700"/>
 </p>
 
 <p align="center"><em>Tracking performance on letter-shaped trajectories at 1.0× speed. Our policy (red) achieves superior precision compared to the Jacobian-based controller (green).</em></p>
@@ -83,7 +83,7 @@ min_μ J(μ) = E[ Σ λ^{i-1} ( ||T̂_{t+i} - T*_{t+i}||² + α||Δa_{t+i-1}||²
 ```
 
 <p align="center">
-  <img src="docs/fig_policy.png" width="700"/>
+  <img src="docs/fig_policy.png" width="500"/>
 </p>
 
 ### Reference Augmentation
