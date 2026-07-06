@@ -145,13 +145,13 @@ This converts raw CSV logs into HDF5 files with computed features (rotation vect
 **Train a dynamics model:**
 
 ```bash
-python train/offline_train.py --model dynamics
+python train/offline_train.py
 ```
 
 **Train a policy model:**
 
 ```bash
-python train/offline_train.py --model policy
+python train/offline_train.py
 ```
 
 ### MPC Optimization
