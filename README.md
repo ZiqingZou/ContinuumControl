@@ -70,7 +70,7 @@ To prevent overfitting to specific trajectories in the offline dataset, a **mult
 
 A **masked mixing strategy** further decouples the policy's dependency on specific trajectory shapes by randomly switching between following a time-varying path and maintaining a static setpoint.
 
-### Tracking Performance ([arXiv:2604.25698](https://arxiv.org/abs/2604.25698))
+### Tracking Performance
 
 **Average Tracking Errors (Position mm / Orientation °)**
 
