@@ -70,15 +70,26 @@ To prevent overfitting to specific trajectories in the offline dataset, a **mult
 
 A **masked mixing strategy** further decouples the policy's dependency on specific trajectory shapes by randomly switching between following a time-varying path and maintaining a static setpoint.
 
-## Experimental Results
+### Tracking Performance ([arXiv:2604.25698](https://arxiv.org/abs/2604.25698))
 
-Tracking Precision Comparison (Position Error in mm, Orientation Error in °)([arXiv:2604.25698](https://arxiv.org/abs/2604.25698))
+**Average Tracking Errors (Position mm / Orientation °)**
 
-| Speed | Ours (Pos only) | Ours | Feedforward | Feedback | Hybrid |
-|---|---|---|---|---|
-| 1.0× | **9.8** / - | 12.5 / **4.9°** | 159.1 / 16.4° | 46.6 / 26.5° | 24.5 / 23.1° |
-| 1.7× | **13.4** / - | 14.0 / **6.4°** | 159.0 / 16.5° | 62.8 / 23.7° | 33.0 / 21.9° |
-| 2.5× | **17.3** / - | 19.0 / **6.9°** | 159.1 / 16.4° | 79.6 / 22.8° | 43.6 / 20.9° |
+| Speed    | Ours (Pos-only) | Ours               | Feedforward      | Feedback        | Hybrid          |
+|----------|-----------------|--------------------|------------------|-----------------|-----------------|
+| 1.0×     | **9.8** / —     | 12.5 / **4.9°**   | 159.1 / 16.4°    | 46.6 / 26.5°    | 24.5 / 23.1°    |
+| 1.7×     | **13.4** / —    | 14.0 / **6.4°**   | 159.0 / 16.5°    | 62.8 / 23.7°    | 33.0 / 21.9°    |
+| 2.5×     | **17.3** / —    | 19.0 / **6.9°**   | 159.1 / 16.4°    | 79.6 / 22.8°    | 43.6 / 20.9°    |
+
+### Dynamics Modeling ([arXiv:2604.25691](https://arxiv.org/abs/2604.25691))
+
+**Average First-Step Prediction Errors across Datasets (mm / °)**
+
+| Training Set | 𝒟_test          | 𝒟_traj          | 𝒟_date          |
+|--------------|-----------------|-----------------|-----------------|
+| 𝒟_train      | **1.43 / 1.40°** | **1.48 / 0.84°** | **1.32 / 1.23°** |
+| 𝒟_small      | 1.58 / 1.64°    | 1.86 / 1.12°    | 1.57 / 1.39°    |
+| 𝒟_2days      | 2.18 / 1.63°    | 4.66 / 1.10°    | 3.67 / 1.94°    |
+| 𝒟_clean      | 2.29 / 2.03°    | 2.28 / 2.66°    | 1.67 / 1.39°    |
 
 ## Project Structure
 
