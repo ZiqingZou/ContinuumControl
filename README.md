@@ -70,6 +70,38 @@ To prevent overfitting to specific trajectories in the offline dataset, a **mult
 
 A **masked mixing strategy** further decouples the policy's dependency on specific trajectory shapes by randomly switching between following a time-varying path and maintaining a static setpoint.
 
+## Experimental Results
+
+### Paper 1: Dynamics Modeling & Robust Control ([arXiv:2604.25691](https://arxiv.org/abs/2604.25691))
+
+**Table I: Average First-Step Prediction Errors across Datasets (mm / °)**
+
+| Training Set | D_test | D_traj | D_date |
+|---|---|---|---|
+| D_train: 1.27 / 1.33° | **1.43 / 1.40°** | **1.48 / 0.84°** | **1.32 / 1.23°** |
+| D_small: 1.22 / 1.31° | 1.58 / 1.64° | 1.86 / 1.12° | 1.57 / 1.39° |
+| D_2days: 0.79 / 0.72° | 2.18 / 1.63° | 4.66 / 1.10° | 3.67 / 1.94° |
+| D_clean: 0.90 / 0.80° | 2.29 / 2.03° | 2.28 / 2.66° | 1.67 / 1.39° |
+
+**Table II: Average Tracking Errors of Different Controllers (mm / °)**
+
+| Speed | Ours | Feedforward | Feedback | Hybrid |
+|---|---|---|---|---|
+| 1.0× | 25.3 / **7.2°** | 159.1 / 16.4° | 46.6 / 26.5° | **24.5** / 23.1° |
+| 1.7× | **30.4** / **8.2°** | 159.0 / 16.5° | 62.8 / 23.7° | 33.0 / 21.9° |
+| 2.5× | **36.1** / **10.0°** | 159.1 / 16.4° | 79.6 / 22.8° | 43.6 / 20.9° |
+
+### Paper 2: Reference-Augmented Tracking Policy ([arXiv:2604.25698](https://arxiv.org/abs/2604.25698))
+
+**Table I: Tracking Precision Comparison (Position Error in mm, Orientation Error in °)**
+
+| Method | 1.0× Pos. | 1.0× Ori. | 1.7× Pos. | 1.7× Ori. | 2.5× Pos. | 2.5× Ori. | Avg Pos. | Avg Ori. |
+|---|---|---|---|---|---|---|---|---|
+| Ours (w/ Aug.) | **12.49** | **4.9** | **14.04** | **6.4** | **18.96** | **6.9** | **14.25** | **5.8** |
+| Dataset Ref (w/o Aug.) | 25.32 | 7.2 | 30.39 | 8.2 | 36.10 | 10.0 | 29.00 | 8.1 |
+| Jacobian-based | 24.46 | 23.1 | 32.97 | 21.9 | 43.61 | 20.9 | 30.84 | 22.3 |
+| Ours (Pos-only) | 9.79 | - | 13.41 | - | 17.27 | - | 12.37 | - |
+
 ## Project Structure
 
 ```
