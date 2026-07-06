@@ -20,6 +20,32 @@ TDCRs pose significant modeling and control challenges due to complex nonlineari
 - **Dynamics Model**: A GRU-based recurrent model with **bidirectional multi-channel connectivity** and **residual prediction** that effectively suppresses compounding errors during long-horizon auto-regressive prediction.
 - **Control Policy**: An end-to-end neural policy optimized by **backpropagating tracking errors through the differentiable dynamics model**, which implicitly internalizes compensation for intricate nonlinearities.
 
+## Experimental Results
+
+### Tracking Performance ([arXiv:2604.25698](https://arxiv.org/abs/2604.25698))
+
+**Average Tracking Errors (Position mm / Orientation °)**
+
+| Speed    | Ours (Pos-only) | Ours               | Feedforward      | Feedback        | Hybrid          |
+|----------|-----------------|--------------------|------------------|-----------------|-----------------|
+| 1.0×     | **9.8** / -     | 12.5 / **4.9°**   | 159.1 / 16.4°    | 46.6 / 26.5°    | 24.5 / 23.1°    |
+| 1.7×     | **13.4** / -    | 14.0 / **6.4°**   | 159.0 / 16.5°    | 62.8 / 23.7°    | 33.0 / 21.9°    |
+| 2.5×     | **17.3** / -    | 19.0 / **6.9°**   | 159.1 / 16.4°    | 79.6 / 22.8°    | 43.6 / 20.9°    |
+
+<p align="center">
+  <img src="docs/fig_xy_traj.png" width="700"/>
+</p>
+
+<p align="center"><em>Tracking performance on letter-shaped trajectories at 1.0× speed. Our policy (red) achieves superior precision compared to the Jacobian-based controller (green).</em></p>
+
+### Dynamics Prediction ([arXiv:2604.25691](https://arxiv.org/abs/2604.25691))
+
+<p align="center">
+  <img src="docs/fig_dynamics_traj.png" width="700"/>
+</p>
+
+<p align="center"><em>Long-horizon auto-regressive prediction across a 2.5-minute random trajectory. Our model (red solid) maintains the lowest position error with the slowest error accumulation rate.</em></p>
+
 ## Method
 
 ### Dynamics Model
@@ -69,16 +95,6 @@ To prevent overfitting to specific trajectories in the offline dataset, a **mult
 - **Random walk**: `δ^step = Σ m_k · w_k` — models cumulative drift and sudden setpoint changes.
 
 A **masked mixing strategy** further decouples the policy's dependency on specific trajectory shapes by randomly switching between following a time-varying path and maintaining a static setpoint.
-
-### Tracking Performance
-
-**Average Tracking Errors (Position mm / Orientation °)**
-
-| Speed    | Ours (Pos-only) | Ours               | Feedforward      | Feedback        | Hybrid          |
-|----------|-----------------|--------------------|------------------|-----------------|-----------------|
-| 1.0×     | **9.8** / -     | 12.5 / **4.9°**   | 159.1 / 16.4°    | 46.6 / 26.5°    | 24.5 / 23.1°    |
-| 1.7×     | **13.4** / -    | 14.0 / **6.4°**   | 159.0 / 16.5°    | 62.8 / 23.7°    | 33.0 / 21.9°    |
-| 2.5×     | **17.3** / -    | 19.0 / **6.9°**   | 159.1 / 16.4°    | 79.6 / 22.8°    | 43.6 / 20.9°    |
 
 ## Project Structure
 
