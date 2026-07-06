@@ -12,7 +12,7 @@ ContinuumControl is a differentiable learning framework for tendon-driven contin
 📄 **Paper**: [arXiv:2604.25691](https://arxiv.org/abs/2604.25691) | 🎬 **Video**: [Bilibili](https://www.bilibili.com/video/BV182jR67Ek5/)
 
 <p align="center">
-  <img src="docs/fig_system.png" width="700"/>
+  <img src="docs/fig_system.png" width="500"/>
 </p>
 
 TDCRs pose significant modeling and control challenges due to complex nonlinearities such as frictional hysteresis and transmission compliance. Our framework addresses these through two core components:
@@ -41,7 +41,7 @@ TDCRs pose significant modeling and control challenges due to complex nonlineari
 | 2.5×     | **17.3** / -    | 19.0 / **6.9°**   | 159.1 / 16.4°    | 79.6 / 22.8°    | 43.6 / 20.9°    |
 
 <p align="center">
-  <img src="docs/fig_xy_traj.png" width="700"/>
+  <img src="docs/fig_xy_traj.png" width="500"/>
 </p>
 
 <p align="center"><em>Tracking performance on letter-shaped trajectories at 1.0× speed. Our policy (red) achieves superior precision compared to the Jacobian-based controller (green).</em></p>
