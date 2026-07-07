@@ -83,7 +83,7 @@ min_μ J(μ) = E[ Σ λ^{i-1} ( ||T̂_{t+i} - T*_{t+i}||² + α||Δa_{t+i-1}||²
 ```
 
 <p align="center">
-  <img src="docs/fig_policy.png" width="500"/>
+  <img src="docs/fig_policy.png" width="400"/>
 </p>
 
 ### Reference Augmentation
